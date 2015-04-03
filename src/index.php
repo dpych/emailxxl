@@ -13,7 +13,7 @@ class Products {
 
     public function getData() {
         $file = fopen($this->file, "r");
-        return fgetcsv($file);
+        return fgetcsv($file, 0, ';');
     }
     
     public function generateList() {
