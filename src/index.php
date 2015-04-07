@@ -40,30 +40,35 @@ abstract class Model_XML extends Model {
     }
 }
 
+abstract class Model_CSV extends Model {
+
+    protected $_data = array();
+    protected $_separator = ";";
+
+    public function __construct() {
+        $this->loadData();
+    }
+
+    public function getData() {
+        return $this->_data;
+    }
+    
+    private function loadData() {
+        $file = fopen($this->source, "r");
+        while( ($data = fgetcsv($file, 0, $this->_separator)) !== FALSE ) {
+             $this->_data[] = $data;
+        }
+    }
+}
+
 class Model_SizeerCom extends Model_XML {
     protected $source = 'http://sklep.sizeer.com/comparators/NEW_CENEO.xml';    
 }
 
-class Model_Products extends Model {
-
-    public $source = 'products.csv';
-    public $image_dir = 'images';
-    protected $image;
-
-    public function __construct() {
-        $this->products = $this->getData();
-        $this->image = array();
-    }
-
-    public function getData() {
-        $file = fopen($this->source, "r");
-        $rows = array();
-        while( ($data = fgetcsv($file, 0, ';')) !== FALSE ) {
-            $rows[] = $data;
-        }
-        return $rows;
-    }
+class Model_Products extends Model_CSV {
+    protected $source = 'products.csv';
 }
+
 
 class HTML_View {
     public function generateList($products) {
@@ -96,6 +101,10 @@ class HTML_View {
 function main() {
     $xml = new Model_SizeerCom();
     $csv = new Model_Products();
+    
+    foreach($csv->getData() as $item ) {
+        echo $item[0];
+    }
     
 }
 
