@@ -11,7 +11,21 @@ abstract class Model_XML extends Model {
     protected $_reader = NULL;
     protected $_offset = 'offer';
     
+    public function __construct() {
+        $this->loadData();
+    }
+    
     public function getData() {
+        return $this->_data;
+    }
+
+    public function getDataDetails($id) {
+        if($id) {
+            return isset($this->_data[$id]) ? $this->_data[$id] : NULL ;
+        }
+    }
+    
+    private function loadData() {
         $this->_reader = new XMLReader();
         $this->_reader->open($this->source);
         
@@ -22,13 +36,6 @@ abstract class Model_XML extends Model {
                 $element = simplexml_import_dom($doc->importNode($this->_reader->expand(),true));
                 $this->_data[trim($element->id)] = $element;
             }
-        }
-        return $this->_data;
-    }
-
-    public function getDataDetails($id) {
-        if($id) {
-            return isset($this->_data[$id]) ? $this->_data[$id] : NULL ;
         }
     }
 }
@@ -56,17 +63,19 @@ class Model_Products extends Model {
         }
         return $rows;
     }
-    
-    public function generateList() {
+}
+
+class HTML_View {
+    public function generateList($products) {
         
         $col = 0;
         $i = 0;
         $html = "<table>\n<tbody>\n<tr>\n";
         
-        foreach($this->products as $item) {
+        foreach($products as $item) {
             $i++;
             $col++;
-            $image_url = isset($this->image[$i]) ? $this->image[$i] : "";
+            $image_url = isset($item->image) ? $this->image : "";
             $html .= "<td>"
                     . "<a href=\"{$item[0]}\" target=\"_blank\" title=\"Produkt\">"
                     . "<img src=\"{$image_url}\" alt=\"product\" />"
@@ -86,9 +95,8 @@ class Model_Products extends Model {
 
 function main() {
     $xml = new Model_SizeerCom();
-    $xml->getData();
-    $app = new Model_Products();  
-    echo $app->generateList();
+    $csv = new Model_Products();
+    
 }
 
 main();
