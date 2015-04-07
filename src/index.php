@@ -71,19 +71,20 @@ class Model_Products extends Model_CSV {
 
 
 class HTML_View {
-    public function generateList($products) {
+    static public function generateList($products) {
         
         $col = 0;
         $i = 0;
-        $html = "<table>\n<tbody>\n<tr>\n";
+        $html = "<table width=\"600px\" cellspadding=\"0\" cellspasing=\"0\">\n<tbody>\n<tr>\n";
         
         foreach($products as $item) {
             $i++;
             $col++;
-            $image_url = isset($item->image) ? $this->image : "";
-            $html .= "<td>"
-                    . "<a href=\"{$item[0]}\" target=\"_blank\" title=\"Produkt\">"
-                    . "<img src=\"{$image_url}\" alt=\"product\" />"
+            $html .= "<td width=\"33%\">"
+                    . "<a href=\"{$item->url}\" target=\"_blank\" title=\"Produkt\">"
+                    . "<img src=\"{$item->image}\" alt=\"product\" width=\"100%\" />"
+                    . "<span style=\"font-weight:bold\">{$item->attributes->attribute[0]->value}</span><br />"
+                    . "{$item->name}"
                     . "</a>"
                     . "</td>";
             if($col>=3) {
@@ -102,9 +103,11 @@ function main() {
     $xml = new Model_SizeerCom();
     $csv = new Model_Products();
     
+    $products = array();
     foreach($csv->getData() as $item ) {
-        echo $item[0];
+        $products[] = $xml->getDataDetails((int) $item[0]);
     }
+    echo HTML_View::generateList($products);
     
 }
 
