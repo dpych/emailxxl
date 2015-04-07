@@ -5,7 +5,7 @@ class View {
             $$key = $value;
         }
         ob_start();
-        include_once $path;
+        include_once APP . VIEW . DS . $path;
         $html = ob_get_contents();
         ob_end_clean();
         return $html;
