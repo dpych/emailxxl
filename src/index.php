@@ -51,7 +51,16 @@ spl_autoload_register('frameworkLoader');
 spl_autoload_register('appLoader');
 
 function main() {
-    new ProductsEmail();
+    if(isset($_POST['c'])) {
+        $class = $c();
+    } else {
+        $class = new Controller_Main();
+    }
+    if(isset($_POST['a'])) {
+        $class->$a();
+    } else {
+        $class->index($_GET);
+    }
 }
 
 main();
