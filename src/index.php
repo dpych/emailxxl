@@ -1,5 +1,12 @@
 <?php 
-class Model_XML {
+abstract class Model {
+    public $source;
+    protected $_data;
+    
+    abstract public function getData();
+}
+
+class Model_XML extends Model {
     public $source = 'http://sklep.sizeer.com/comparators/NEW_CENEO.xml';
     protected $_data = array();
     protected $_reader = NULL;
@@ -29,11 +36,10 @@ class Model_XML {
     }
 }
 
-class Model_Products {
+class Model_Products extends Model {
 
-    public $file = 'products.csv';
+    public $source = 'products.csv';
     public $image_dir = 'images';
-    protected $products;
     protected $image;
 
     public function __construct() {
@@ -43,7 +49,7 @@ class Model_Products {
     }
 
     public function getData() {
-        $file = fopen($this->file, "r");
+        $file = fopen($this->source, "r");
         $rows = array();
         while( ($data = fgetcsv($file, 0, ';')) !== FALSE ) {
             $rows[] = $data;
