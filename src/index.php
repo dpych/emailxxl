@@ -70,45 +70,46 @@ class Model_Products extends Model_CSV {
 }
 
 
-class HTML_View {
-    static public function generateList($products) {
-        
-        $col = 0;
-        $i = 0;
-        $html = "<table width=\"600px\" cellspadding=\"0\" cellspasing=\"0\">\n<tbody>\n<tr>\n";
-        
-        foreach($products as $item) {
-            $i++;
-            $col++;
-            $html .= "<td width=\"33%\">"
-                    . "<a href=\"{$item->url}\" target=\"_blank\" title=\"Produkt\">"
-                    . "<img src=\"{$item->image}\" alt=\"product\" width=\"100%\" />"
-                    . "<span style=\"font-weight:bold\">{$item->attributes->attribute[0]->value}</span><br />"
-                    . "{$item->name}"
-                    . "</a>"
-                    . "</td>";
-            if($col>=3) {
-                $col = 0;
-                $html .= "</tr>\n<tr>\n";
-            }
+class View {
+    public static function factory($path, $params = array()) {
+        foreach($params as $key => $value) {
+            $$key = $value;
         }
-        
-        $html .= "</tr>\n</tbody>\n</table>";
-        
+        ob_start();
+        include_once $path;
+        $html = ob_get_contents();
+        ob_end_clean();
         return $html;
     }
 }
 
-function main() {
-    $xml = new Model_SizeerCom();
-    $csv = new Model_Products();
+class ProductsEmail {
     
-    $products = array();
-    foreach($csv->getData() as $item ) {
-        $products[] = $xml->getDataDetails((int) $item[0]);
+    private $products;
+    
+    public function __construct() {
+        $this->generateProductView();
+        $this->generateEmail();
     }
-    echo HTML_View::generateList($products);
     
+    private function generateProductView() {
+        $xml = new Model_SizeerCom();
+        $csv = new Model_Products();
+
+        $products = array();
+        foreach($csv->getData() as $item ) {
+            $products[] = $xml->getDataDetails((int) $item[0]);
+        }
+        $this->products = View::factory('./view/products.php', array('products' => $products));
+    }
+    
+    private function generateEmail() {
+        echo View::factory('./view/template.php', array('products' => $this->products));
+    }
+}
+
+function main() {
+    new ProductsEmail();
 }
 
 main();
