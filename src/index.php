@@ -1,25 +1,22 @@
 <?php 
 abstract class Model {
-    public $source;
+    protected $source;
     protected $_data;
     
     abstract public function getData();
 }
 
-class Model_XML extends Model {
-    public $source = 'http://sklep.sizeer.com/comparators/NEW_CENEO.xml';
+abstract class Model_XML extends Model {
     protected $_data = array();
     protected $_reader = NULL;
-
-
-    public function __construct() {}
+    protected $_offset = 'offer';
     
     public function getData() {
         $this->_reader = new XMLReader();
         $this->_reader->open($this->source);
         
         while($this->_reader->read()) {
-            if($this->_reader->nodeType == XMLReader::ELEMENT && $this->_reader->name == 'offer')
+            if($this->_reader->nodeType == XMLReader::ELEMENT && $this->_reader->name == $this->_offset)
             {
                 $doc = new DOMDocument('1.0', 'UTF-8');
                 $element = simplexml_import_dom($doc->importNode($this->_reader->expand(),true));
@@ -36,6 +33,10 @@ class Model_XML extends Model {
     }
 }
 
+class Model_SizeerCom extends Model_XML {
+    protected $source = 'http://sklep.sizeer.com/comparators/NEW_CENEO.xml';    
+}
+
 class Model_Products extends Model {
 
     public $source = 'products.csv';
@@ -45,7 +46,6 @@ class Model_Products extends Model {
     public function __construct() {
         $this->products = $this->getData();
         $this->image = array();
-        var_dump($this->products);
     }
 
     public function getData() {
@@ -65,6 +65,7 @@ class Model_Products extends Model {
         
         foreach($this->products as $item) {
             $i++;
+            $col++;
             $image_url = isset($this->image[$i]) ? $this->image[$i] : "";
             $html .= "<td>"
                     . "<a href=\"{$item[0]}\" target=\"_blank\" title=\"Produkt\">"
@@ -73,7 +74,7 @@ class Model_Products extends Model {
                     . "</td>";
             if($col>=3) {
                 $col = 0;
-                $html = "</tr>\n<tr>\n";
+                $html .= "</tr>\n<tr>\n";
             }
         }
         
@@ -84,6 +85,8 @@ class Model_Products extends Model {
 }
 
 function main() {
+    $xml = new Model_SizeerCom();
+    $xml->getData();
     $app = new Model_Products();  
     echo $app->generateList();
 }
