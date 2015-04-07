@@ -4,34 +4,44 @@ class Products {
     public $file = 'products.csv';
     public $image_dir = 'images';
     protected $products;
-    protected $images;
+    protected $image;
 
     public function __construct() {
         $this->products = $this->getData();
+        $this->image = array();
         var_dump($this->products);
     }
 
     public function getData() {
         $file = fopen($this->file, "r");
-        return fgetcsv($file, 0, ';');
+        $rows = array();
+        while( ($data = fgetcsv($file, 0, ';')) !== FALSE ) {
+            $rows[] = $data;
+        }
+        return $rows;
     }
     
     public function generateList() {
         
         $col = 0;
         $i = 0;
-        $html = "<tr>\n";
+        $html = "<table>\n<tbody>\n<tr>\n";
         
         foreach($this->products as $item) {
             $i++;
-            $html .= "<td><a href=\"{$item}\" target=\"_blank\" title=\"Produkt\"><img src=\"{$this->image[$i]}\" alt=\"product\" /></a></td>";
+            $image_url = isset($this->image[$i]) ? $this->image[$i] : "";
+            $html .= "<td>"
+                    . "<a href=\"{$item[0]}\" target=\"_blank\" title=\"Produkt\">"
+                    . "<img src=\"{$image_url}\" alt=\"product\" />"
+                    . "</a>"
+                    . "</td>";
             if($col>=3) {
                 $col = 0;
                 $html = "</tr>\n<tr>\n";
             }
         }
         
-        $html .= "</tr>\n";
+        $html .= "</tr>\n</tbody>\n</table>";
         
         return $html;
     }
@@ -39,6 +49,7 @@ class Products {
 
 function main() {
     $app = new Products();  
+    echo $app->generateList();
 }
 
 main();
