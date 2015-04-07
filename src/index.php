@@ -1,5 +1,35 @@
 <?php 
-class Products {
+class Model_XML {
+    public $source = 'http://sklep.sizeer.com/comparators/NEW_CENEO.xml';
+    protected $_data = array();
+    protected $_reader = NULL;
+
+
+    public function __construct() {}
+    
+    public function getData() {
+        $this->_reader = new XMLReader();
+        $this->_reader->open($this->source);
+        
+        while($this->_reader->read()) {
+            if($this->_reader->nodeType == XMLReader::ELEMENT && $this->_reader->name == 'offer')
+            {
+                $doc = new DOMDocument('1.0', 'UTF-8');
+                $element = simplexml_import_dom($doc->importNode($this->_reader->expand(),true));
+                $this->_data[trim($element->id)] = $element;
+            }
+        }
+        return $this->_data;
+    }
+
+    public function getDataDetails($id) {
+        if($id) {
+            return isset($this->_data[$id]) ? $this->_data[$id] : NULL ;
+        }
+    }
+}
+
+class Model_Products {
 
     public $file = 'products.csv';
     public $image_dir = 'images';
@@ -48,7 +78,7 @@ class Products {
 }
 
 function main() {
-    $app = new Products();  
+    $app = new Model_Products();  
     echo $app->generateList();
 }
 
