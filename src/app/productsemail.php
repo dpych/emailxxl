@@ -2,10 +2,11 @@
 class ProductsEmail {
     
     private $products;
+    protected $_filename = NULL;
     protected $_download = './download/';
 
 
-    public function __construct() {
+    public function run() {
         $this->generateProductView();
         $this->generateEmail();
     }
@@ -69,8 +70,16 @@ class ProductsEmail {
         if(!is_dir($this->_download))
             mkdir ($this->_download, 0777, TRUE);
         
+        $this->_filename = $this->_download . date('Ymd') . '.html';
+        
         $html = View::factory('template.php', array('products' => $this->products));
-        file_put_contents($this->_download . date('Ymd') . '.html', $html);
-        echo $html;
+        
+        file_put_contents($this->_filename, $html);
+        
+        return $html;
+    }
+    
+    public function getFileName() {
+        return $this->_download . $this->_filename;
     }
 }
