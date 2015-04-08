@@ -80,6 +80,6 @@ class ProductsEmail {
     }
     
     public function getFileName() {
-        return $this->_download . $this->_filename;
+        return $this->_filename;
     }
 }

@@ -5,8 +5,9 @@ class Zip {
         $zip = new ZipArchive();
         $zip->open($filename . '.zip', ZipArchive::CREATE);
         
-        foreach($files as $file) {
-            $zip->addFile($file);
+        foreach($files as $file => $value) {
+        //    var_dump($file);
+            $zip->addFile($file, $value);
         }
         
         return $zip->close();
