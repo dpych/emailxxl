@@ -3,6 +3,7 @@ define('DS', '/');
 define('APP', './app');
 define('CORE', './framework');
 define('VIEW', '/view');
+define('SQLITE','./db/database.sqlite');
 
 $extensions = array('.php');
 $ext = implode(',',$extensions);
