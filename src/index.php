@@ -1,9 +1,11 @@
 <?php
+set_time_limit(180);
 define('DS', '/');
 define('APP', './app');
 define('CORE', './framework');
 define('VIEW', '/view');
 define('SQLITE','./db/database.sqlite');
+define('BASE_URL','http://localhost:8000/');
 
 $extensions = array('.php');
 $ext = implode(',',$extensions);
