@@ -10,7 +10,7 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        <form action="?c=main&a=upload" methon="POST" enctype="multipart/form-data">
+        <form action="?c=main&a=download" method="POST" enctype="multipart/form-data">
             <div>
                 <label>Plik z produktami</label>
                 <input type="file" name="csv" />
