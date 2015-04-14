@@ -32,7 +32,7 @@ class ProductsEmail {
             else 
                 $cat = (int) $item[1];
             
-            $tmp = $xml->getDataDetails((int) $item[0]);
+            $tmp = $xml->getDataDetails($item[0]);
             $sex = trim($this->category($tmp->categoryId));
             
             
