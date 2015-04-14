@@ -11,12 +11,6 @@ abstract class Model_XML extends Model {
     public function getData() {
         return $this->_data;
     }
-
-    public function getDataDetails($id) {
-        if($id) {
-            return isset($this->_data[$id]) ? $this->_data[$id] : NULL ;
-        }
-    }
     
     private function loadData() {
         $this->_reader = new XMLReader();
