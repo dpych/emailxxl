@@ -52,12 +52,15 @@ spl_autoload_register('frameworkLoader');
 spl_autoload_register('appLoader');
 
 function main() {
-    if(isset($_POST['c'])) {
-        $class = $c();
+    var_dump($_GET);
+    if(isset($_GET['c'])) {
+        $c = 'Controller_' . $_GET['c'];
+        $class = new $c();
     } else {
         $class = new Controller_Main();
     }
-    if(isset($_POST['a'])) {
+    if(isset($_GET['a'])) {
+        $a = $_GET['a'];
         $class->$a();
     } else {
         $class->index($_GET);
