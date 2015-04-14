@@ -77,17 +77,14 @@
                             </em>
                         </td>
                     </tr>
-
-                    <tr>
-                        <td colspan="6" style="padding:10px 20px; font-family: Verdana, Geneva, sans-serif;">
-                            <a href="http://sklep.sizeer.com/filtr/wypasiony-koszyk/filtr-plec,WW,damskie/?utm_source=mailing&amp;utm_medium=email&amp;utm_content=tytul&amp;utm_campaign=M_<?php echo date('d_m_Y'); ?>_Wirtualny_Koszyk_U&amp;smclient=$$id_salesmanago$$" target="_blank" style="font-size:16px; line-height: 30px; color: #000; text-decoration: none; font-weight: 400; text-transform:uppercase; word-spacing: -1px">Wypasiony koszyk! -10% na wszystko w e-Sizeer.com </a>
-                        </td>
-                    </tr>
                     <tr>
                         <td colspan="6" style="padding:10px 20px;">
                             <p style="font-family: Verdana, Geneva, sans-serif; font-size: 11px; text-align: justify;">
-                                Oderwij się od świątecznych smakołyków i skompletuj swój wypasiony koszyk w sklepie <a href="http://sklep.sizeer.com/?utm_source=mailing&amp;utm_medium=email&amp;utm_content=sklep&amp;utm_campaign=M_<?php echo date('d_m_Y'); ?>_Wirtualny_Koszyk_U&amp;smclient=$$id_salesmanago$$" style="color:#FF9900" target="_blank">e-Sizeer.com</a>! W dniach <strong>5-6 kwietnia</strong> kupując odjechane <strong>buty, ubrania i akcesoria</strong> płacisz <strong>10% mniej</strong>. Jesteś członkiem SizeerClub? Promocja łączy się ze zniżką klubową, dlatego możesz otrzymać nawet <strong>do 20% rabatu na cały asortyment</strong>. Akcja obejmuje również produkty w obniżonych cenach.<strong> Rabat nalicza się w koszyku</strong>. Pamiętaj też o darmowej dostawie!<br /><br /> 
-                                <a href="http://sklep.sizeer.com/files/cms/e-Sizeer_-regulamin-promocji_wypasiony-koszyk_05.04.2015_J.L.pdf?utm_source=mailing&amp;utm_medium=email&amp;utm_content=regulamin&amp;utm_campaign=M_<?php echo date('d_m_Y'); ?>_Wirtualny_Koszyk_U&amp;smclient=$$id_salesmanago$$" style="color:#FF9900" target="_blank">Szczegóły w regulaminie</a>.  
+                                Cześć
+<br /><br />
+Przed wami pierwsza odsłona mailingu prezentującego ofertę wirtualnej półki Sizeer. W kolejnych newsletterach, które będziemy przygotowywać cyklicznie, poinformujemy Was o nowych produktach z wirtualnej półki.
+<br /><br />
+Zachęcamy do lektury :)
                             </p>
                         </td>
                     </tr>
