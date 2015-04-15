@@ -5,7 +5,8 @@ include_once './vendors/excel/PHPExcel/Autoloader.php';
 class Controller_Desc extends Controller {
     
     public function index() {
-        echo View::factory('desc/index.php');
+        $msg = $this->getMsg();
+        echo View::factory('desc/index.php', array('msg'=>$msg));
     }
     
     public function upload() {
@@ -13,7 +14,10 @@ class Controller_Desc extends Controller {
             $excel = PHPExcel_IOFactory::load($_FILES['products']['tmp_name']);
             $tmp   = new PHPExcel();
             
-            $file = fopen('products_desc.xml','w');
+            if(!is_dir('./download'))
+                mkdir('./download', 0777, TRUE);
+            
+            $file = fopen('./download/products_desc.xml','w');
             $dane = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
                     <!DOCTYPE pasaz:Envelope SYSTEM \"loadOffers.dtd\">
                     <pasaz:envelope xmlns:pasaz=\"http://schemas.xmlsoap.org/soap/envelope/\">
@@ -59,6 +63,8 @@ class Controller_Desc extends Controller {
             fwrite($file, "</offers></loadOffers></pasaz:Body></pasaz:envelope>");
             fclose($file);
         }
+        $this->setMsg('Plik pobrany', 'info');
+        $this->redirect('?c=desc');
     }
     
     

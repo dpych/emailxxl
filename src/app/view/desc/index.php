@@ -4,6 +4,9 @@
     </head>
     <body>
         <div>
+            <div class="">
+                <?php echo isset($msg['msg'])? $msg['msg'] : "" ; ?>    
+            </div>
             <form action="?c=desc&a=upload" method="POST" enctype="multipart/form-data">
                 <div>
                     <input type="file" name="products" />

@@ -1,4 +1,5 @@
 <?php
+session_start();
 set_time_limit(180);
 define('DS', '/');
 define('APP', './app');
