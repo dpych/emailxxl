@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 set_time_limit(180);
 define('DS', '/');
@@ -55,12 +56,11 @@ spl_autoload_register('frameworkLoader');
 spl_autoload_register('appLoader');
 
 function main() {
-    var_dump($_GET);
     if(isset($_GET['c'])) {
         $c = 'Controller_' . $_GET['c'];
         $class = new $c();
     } else {
-        $class = new Controller_Main();
+        $class = new Controller_Desc();
     }
     if(isset($_GET['a'])) {
         $a = $_GET['a'];
@@ -71,3 +71,4 @@ function main() {
 }
 
 main();
+ob_end_flush();
