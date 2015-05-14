@@ -1,5 +1,8 @@
 <html>
     <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="lib/css/bootstrap.css" type="text/css" rel="stylesheet" />
         <style type="text/css">
             body {padding-top: 60px;}
@@ -20,7 +23,7 @@
             <div class="row">
                 <form action="?c=desc&a=upload" method="POST" enctype="multipart/form-data" class="col-xs-5">
                     <div class="form-group">
-                        <input type="file" name="products" class="form-control" />
+                        <input type="file" name="products" class="form-control" accept=".xlsx" />
                     </div>
                     <div class="form-group">
                         <select disabled="disabled" class="form-control">
