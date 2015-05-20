@@ -12,8 +12,6 @@ abstract class Model_Sqlite extends Model {
         }
         return $this;
     }
-
-    abstract public function getData();
     
     private function createTable() {
         $this->_data->exec($this->_schemat);
