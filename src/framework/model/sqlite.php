@@ -10,7 +10,5 @@ abstract class Model_Sqlite extends Model {
         return $this;
     }
 
-    abstract public function getData() {
-        echo 'dziala';
-    }
+    abstract public function getData() {}
 }
