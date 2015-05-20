@@ -13,6 +13,10 @@ abstract class Model_Sqlite extends Model {
         return $this;
     }
     
+    public function getConn() {
+        return $this->_data;
+    }
+    
     private function createTable() {
         $this->_data->exec($this->_schemat);
     }
