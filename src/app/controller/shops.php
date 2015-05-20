@@ -8,8 +8,9 @@ class Controller_Shops extends Controller {
     public function index() {
         $msg = $this->getMsg();
         $model_shops = new Model_Shops();
+        $model_salons = new Model_Salons();
         $shops = $model_shops->getData();
-        echo View::factory('shops/index.php', array('shops'=>$shops, 'msg' => $msg));
+        echo View::factory('shops/index.php', array('shops'=>$shops, 'msg' => $msg, 'salons'=>$model_salons));
     }
     
     public function edit() {

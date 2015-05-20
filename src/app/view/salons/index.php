@@ -11,7 +11,7 @@
     <body>
         <header class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
-                <a class="navbar-brand" href="index.php?c=desc">Lista Salonów / Sklepów</a>
+                <a class="navbar-brand" href="index.php?c=desc">Lista Salonów / Sklepów - Lista</a>
             </div>
         </header>
         <div class="container">
@@ -22,7 +22,7 @@
             <?php endif; ?>
             <div class="row">
                 <div class="col-xs-12 text-right">
-                    <a href="?c=shops&a=edit" class="btn btn-primary btn-sm">Dodaj nową stronę</a>
+                    <a href="?c=salons&a=edit<?php echo isset($_GET['shop_id']) ? '&shop_id='.$_GET['shop_id'] : ''; ?>" class="btn btn-primary btn-sm">Dodaj nową lokalizację</a>
                 </div>
             </div>
             <div class="row">
@@ -31,24 +31,26 @@
                         <thead>
                             <tr>
                                 <th width="20">ID</th>
-                                <th>Nazwa Sklepu</th>
-                                <th width="20">Ilość Salonów/Sklepów</th>
-                                <th width="50">Akcje</th>
+                                <th>Miasto</th>
+                                <th>Lokalizacja</th>
+                                <th>Adres</th>
+                                <th>Telefon</th>
+                                <th>Pon-Pt</th>
+                                <th>Sobota</th>
+                                <th>Niedziela</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach( $shops as $shop ) : ?>
-                            <?php
-                                $c = $salons->getData()->querySingle('select count(*) from salons where shop_id='.$shop['id']);
-                            ?>
+                            <?php foreach( $salons as $shop ) : ?>
                             <tr>
                                 <td><?php echo $shop['id']; ?></td>
-                                <td><a href="?c=shops&a=edit&id=<?php echo $shop['id']; ?>"><?php echo $shop['name']; ?></a></td>
-                                <td><?php echo $c; ?></td>
-                                <td width="150">
-                                    <a href="?c=salons&a=edit&shop_id=<?php echo $shop['id']; ?>" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i></a>
-                                    <a href="?c=salons&shop_id=<?php echo $shop['id']; ?>" class="btn btn-default"><i class="glyphicon glyphicon-list"></i></a>
-                                </td>
+                                <td><a href="?c=salons&a=edit&id=<?php echo $shop['id']; ?>"><?php echo $shop['miasto']; ?></a></td>
+                                <td><a href="?c=salons&a=edit&id=<?php echo $shop['id']; ?>"><?php echo $shop['lokalizacja']; ?></a></td>
+                                <td><a href="?c=salons&a=edit&id=<?php echo $shop['id']; ?>"><?php echo $shop['adres']; ?></a></td>
+                                <td><?php echo $shop['telefon']; ?></td>
+                                <td><?php echo $shop['pon-pt']; ?></td>
+                                <td><?php echo $shop['sob']; ?></td>
+                                <td><?php echo $shop['niedz']; ?></td>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>

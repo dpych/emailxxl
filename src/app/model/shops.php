@@ -2,7 +2,7 @@
 class Model_Shops extends Model_Sqlite {
 
     protected  $_table = 'shops';
-    protected  $_shemat = "CREATE TABLE IF NOT EXISTS `shops` (
+    protected  $_schemat = "CREATE TABLE IF NOT EXISTS `shops` (
                 `id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                 `name`	TEXT NOT NULL,
                 `published`	INTEGER NOT NULL DEFAULT 1
