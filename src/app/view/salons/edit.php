@@ -12,6 +12,10 @@
         <header class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="index.php?c=desc">Lista Salonów / Sklepów</a>
+                <ul class="navbar-nav nav">
+                    <li><a href="?c=shops">Strony</a></li>
+                    <li><a href="?c=salons">Sklepy/Salony</a></li>
+                </ul>
             </div>
         </header>
         <div class="container">
@@ -31,31 +35,31 @@
                     <div class="col-xs-5">
                         <div class="form-group">
                             <label>Miasto</label>
-                            <input type="text" name="miasto" value="<?php echo isset($shop['name']) ? $shop['name'] : ""; ?>" class="form-control"/>
+                            <input type="text" name="miasto" value="<?php echo isset($shop['miasto']) ? $shop['miasto'] : ""; ?>" class="form-control"/>
                         </div>
                         <div class="form-group">
                             <label>Lokalizacja</label>
-                            <input type="text" name="lokalizacja" value="<?php echo isset($shop['name']) ? $shop['name'] : ""; ?>" class="form-control"/>
+                            <input type="text" name="lokalizacja" value="<?php echo isset($shop['lokalizacja']) ? $shop['lokalizacja'] : ""; ?>" class="form-control"/>
                         </div>
                         <div class="form-group">
                             <label>Adres</label>
-                            <textarea name="adres" class="form-control"><?php echo isset($shop['name']) ? $shop['name'] : ""; ?></textarea>
+                            <textarea name="adres" class="form-control"><?php echo isset($shop['adres']) ? $shop['adres'] : ""; ?></textarea>
                         </div>
                         <div class="form-group">
                             <label>Telefon</label>
-                            <input type="text" name="telefon" value="<?php echo isset($shop['name']) ? $shop['name'] : ""; ?>" class="form-control"/>
+                            <input type="text" name="telefon" value="<?php echo isset($shop['telefon']) ? $shop['telefon'] : ""; ?>" class="form-control"/>
                         </div>
                         <div class="form-group">
                             <label>Pon-Pt</label>
-                            <input type="text" name="pon-pt" value="<?php echo isset($shop['name']) ? $shop['name'] : ""; ?>" class="form-control"/>
+                            <input type="text" name="pon-pt" value="<?php echo isset($shop['pon-pt']) ? $shop['pon-pt'] : ""; ?>" class="form-control"/>
                         </div>
                         <div class="form-group">
                             <label>Sobota</label>
-                            <input type="text" name="sob" value="<?php echo isset($shop['name']) ? $shop['name'] : ""; ?>" class="form-control"/>
+                            <input type="text" name="sob" value="<?php echo isset($shop['sob']) ? $shop['sob'] : ""; ?>" class="form-control"/>
                         </div>
                         <div class="form-group">
                             <label>Niedziela</label>
-                            <input type="text" name="niedz" value="<?php echo isset($shop['name']) ? $shop['name'] : ""; ?>" class="form-control"/>
+                            <input type="text" name="niedz" value="<?php echo isset($shop['niedz']) ? $shop['niedz'] : ""; ?>" class="form-control"/>
                         </div>
                     </div>
                     <div class="col-xs-4">
@@ -64,7 +68,20 @@
                             <select name="shop_id" class="form-control">
                                 <option value="0">Wybierz stronę</option>
                                 <?php foreach ( $shops->getData() as $i ) : ?>
-                                <option <?php if((int)$i['id'] == (int) $_GET['shop_id']) : ?>selected="selected"<?php endif; ?> value="<?php echo $i['id'] ?>"><?php echo $i['name'] ?></option>
+                                <?php 
+                                    $select = "";
+                                    
+                                    if((int)$shop['shop_id']) {
+                                        if((int)$i['id'] == (int) $shop['shop_id'] ) {
+                                            $select = "selected=\"selected\"";
+                                        }
+                                    } else {
+                                        if((int)$i['id'] == (int) $_GET['shop_id'] ) {
+                                            $select = "selected=\"selected\"";
+                                        }
+                                    }
+                                ?>
+                                <option <?php echo $select; ?> value="<?php echo $i['id'] ?>"><?php echo $i['name'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>

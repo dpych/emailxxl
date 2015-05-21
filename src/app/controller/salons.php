@@ -8,7 +8,13 @@ class Controller_Salons extends Controller {
     public function index() {
         $msg = $this->getMsg();
         $model_salons = new Model_Salons();
+        $model_shops = new Model_Shops();
+        $model_shops = $model_shops->getData();
+        $pages = array();
         
+        foreach($model_shops as $row) {
+            $pages[$row['id']] = $row['name'];
+        }
         
         $query = "select * from salons";
         if(isset($_GET['shop_id']) && (int)$_GET['shop_id']>0){
@@ -16,8 +22,12 @@ class Controller_Salons extends Controller {
         }
        
         $shops = $model_salons->getData()->query($query);
+        $salons = array();
+        while($row = $shops->fetchArray(SQLITE3_ASSOC) ){
+            $salons[] = $row;
+        }
 
-        echo View::factory('salons/index.php', array('salons'=>$shops, 'msg' => $msg));
+        echo View::factory('salons/index.php', array('salons'=>$salons, 'msg' => $msg, 'pages'=>$pages));
     }
     
     public function edit() {

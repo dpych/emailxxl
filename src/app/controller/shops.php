@@ -25,7 +25,6 @@ class Controller_Shops extends Controller {
     }
     
     public function save() {
-        var_dump($_POST);
         $ret = false;
         $lastis = "";
         if(isset($_POST['sklep']) && (bool)$_POST['sklep']) {
@@ -51,7 +50,6 @@ class Controller_Shops extends Controller {
         } else {
             $this->setMsg('Aktualizacja bazy się nie powiodła', 'danger');
         }
-        var_dump($ret);
         $this->redirect('?c=shops&a=edit&id='.$lastid);
     }
 }

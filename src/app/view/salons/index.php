@@ -12,6 +12,10 @@
         <header class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="index.php?c=desc">Lista Salonów / Sklepów - Lista</a>
+                <ul class="navbar-nav nav">
+                    <li><a href="?c=shops">Strony</a></li>
+                    <li class="active"><a href="?c=salons">Sklepy/Salony</a></li>
+                </ul>
             </div>
         </header>
         <div class="container">
@@ -31,6 +35,7 @@
                         <thead>
                             <tr>
                                 <th width="20">ID</th>
+                                <th width="50">Strona</th>
                                 <th>Miasto</th>
                                 <th>Lokalizacja</th>
                                 <th>Adres</th>
@@ -44,6 +49,7 @@
                             <?php foreach( $salons as $shop ) : ?>
                             <tr>
                                 <td><?php echo $shop['id']; ?></td>
+                                <td><?php echo $pages[$shop['shop_id']]; ?></td>
                                 <td><a href="?c=salons&a=edit&id=<?php echo $shop['id']; ?>"><?php echo $shop['miasto']; ?></a></td>
                                 <td><a href="?c=salons&a=edit&id=<?php echo $shop['id']; ?>"><?php echo $shop['lokalizacja']; ?></a></td>
                                 <td><a href="?c=salons&a=edit&id=<?php echo $shop['id']; ?>"><?php echo $shop['adres']; ?></a></td>

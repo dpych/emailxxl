@@ -12,6 +12,10 @@
         <header class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="index.php?c=desc">Lista Salonów / Sklepów</a>
+                <ul class="navbar-nav nav">
+                    <li><a href="?c=shops">Strony</a></li>
+                    <li><a href="?c=salons">Sklepy/Salony</a></li>
+                </ul>
             </div>
         </header>
         <div class="container">
