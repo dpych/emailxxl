@@ -26,9 +26,20 @@
             <?php endif; ?>
             <form action="?c=salons&a=save" method="POST">
                 <div class="row">
+                    <div class="col-xs-3">
+<!--                        <form action="?c=salons&a=save" method="POST">
+                            <button type="submit" class="btn btn-danger btn-sm">Usuń</button>
+                            <input type="hidden" name="id" value="<?php echo isset($shop['id']) ? $shop['id'] : ""; ?>" />
+                        </form>-->
+                    </div>
                     <div class="col-xs-12 text-right">
                         <button type="submit" class="btn btn-success btn-sm">Zapisz</button>
                         <a href="?c=salons<?php echo isset($_GET['shop_id']) && (int)$_GET['shop_id']>0 ? "&shop_id=".$_GET['shop_id'] : ""; ?>" class="btn btn-primary btn-sm">Wyjdź</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3 class="title"><?php if(isset($shop['id'])) : ?>Edycja<?php else: ?>Dodaj<?php endif; ?></h3>
                     </div>
                 </div>
                 <div class="row">
@@ -89,7 +100,8 @@
                             <label>Wyświetl</label>
                             <?php
                                 if(!count($shop)) {
-                                    $shop = array('published' => 1);
+                                    $shop = array('published' => 1, 'params' => "{lat:\"\",lat:\"log\",url:\"\"}");
+                                    $params = json_decode($shop['params']);
                                 }
                             ?>
                             <select name="published" class="form-control">
@@ -97,6 +109,27 @@
                                 <option <?php echo (int)$shop['published']==0 ? "selected=\"selected\"" : ""; ?> value="0">NIE</option>
                             </select>
                         </div>
+                        <?php 
+                            $params = json_decode(htmlspecialchars_decode($shop['params']));
+                        ?>
+                        <fieldset>
+                            <legend>Mapa</legend>
+                            <div class="form-group">
+                                <label>Lat</label>
+                                <input type="text" name="lat" value="<?php echo isset($params->lat) ? $params->lat : ""; ?>" class="form-control"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Log</label>
+                                <input type="text" name="log" value="<?php echo isset($params->log) ? $params->log : ""; ?>" class="form-control"/>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Strona sklepu</legend>
+                            <div class="form-group">
+                                <label>Url</label>
+                                <input type="text" name="url" value="<?php echo isset($params->url) ? $params->url : ""; ?>" class="form-control"/>
+                            </div>
+                        </fieldset>
                     </div>
                 </div>
                 <input type="hidden" name="id" value="<?php echo isset($shop['id']) ? $shop['id'] : ""; ?>" />

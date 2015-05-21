@@ -52,6 +52,11 @@ class Controller_Salons extends Controller {
             
             $pp = "pon-pt";
             
+            $params = new stdClass();
+            $params->lat = $_POST['lat'];
+            $params->log = $_POST['log'];
+            $params->url = $_POST['url'];
+            
             $obj = new stdClass();
             $obj->miasto = $_POST['miasto'];
             $obj->adres = $_POST['adres'];
@@ -62,6 +67,7 @@ class Controller_Salons extends Controller {
             $obj->niedz = $_POST['niedz'];
             $obj->published = $_POST['published'];
             $obj->shop_id = $_POST['shop_id'];
+            $obj->params = htmlspecialchars(json_encode($params));
             
             if((int)$_POST['id']>0) {     
                 $obj->id = $_POST['id'];

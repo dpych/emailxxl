@@ -41,6 +41,7 @@ class Controller_Api extends Controller {
         
         for ($i=0; $i<count($data->data); $i++ ) {
             $data->data[$i]['shop_id'] = isset($pages[$data->data[$i]['shop_id']]) ? $pages[$data->data[$i]['shop_id']] : "";
+            $data->data[$i]['params'] = json_decode(htmlspecialchars_decode($data->data[$i]['params']));
         }
         header('Content-Type: application/json; charset=utf-8');
         return json_encode($data);
@@ -74,7 +75,18 @@ class Controller_Api extends Controller {
                 if($key=='shop_id') { 
                     $value = isset($pages[$value]) ? $pages[$value] : "";
                 }
-                $sklep->addChild($key, $value);
+                if($key=='params') {
+                    $params = json_decode(htmlspecialchars_decode($value));
+                    $param = $sklep->addChild($key);
+                    if( $params != NULL ) {
+                        foreach( $params as $k=>$v ) {
+                            $param->addChild($k, $v);
+                        }
+                    }
+                } else {
+                    $sklep->addChild($key, $value);
+                }
+                
             }
         }
         header('Content-Type: text/xml; charset=utf-8');
@@ -86,6 +98,7 @@ class Controller_Api extends Controller {
         $model_shops = new Model_Shops();
         $model_shops = $model_shops->getData();
         $pages = array();
+        $params = array('lat','log','url');
 
         foreach($model_shops as $row) {
             $pages[$row['id']] = $row['name'];
@@ -93,18 +106,34 @@ class Controller_Api extends Controller {
         
         for ($i=0; $i<count($data->data); $i++ ) {
             $data->data[$i]['shop_id'] = isset($pages[$data->data[$i]['shop_id']]) ? $pages[$data->data[$i]['shop_id']] : "";
+            $data->data[$i]['params'] = json_decode(htmlspecialchars_decode($data->data[$i]['params']));
         }
         
         $file = fopen("php://memory","w");
         $header = array();
         foreach( $data->data[0] as $key=>$value ) {
+            if($key!='params') {
+                $header[] = $key;
+            }
+        }
+        foreach( $params as $key) {
             $header[] = $key;
         }
+        
         fputcsv($file, $header, ';');
         foreach( $data->data as $item ) {
             $tmp = array();
-            foreach ( $item as $a ) {
-                $tmp[] = mb_convert_encoding($a, 'UTF-16LE', 'UTF-8');
+            foreach ( $item as $a=>$v ) {
+                if($a!="params") {
+                    //$tmp[] = mb_convert_encoding($v, 'CP1250', 'UTF-8');
+                    $tmp[] =  iconv('UTF-8', 'CP1250', $v);
+                } else {
+                    if($v) {
+                        foreach($params as $p) {
+                            $tmp[] = $v->$p;
+                        }
+                    }
+                }
             }
             fputcsv($file, $tmp, ';');
         }
