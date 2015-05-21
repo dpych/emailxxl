@@ -28,7 +28,7 @@
                 <div class="row">
                     <div class="col-xs-12 text-right">
                         <button type="submit" class="btn btn-success btn-sm">Zapisz</button>
-                        <a href="?c=salons" class="btn btn-primary btn-sm">Wyjdź</a>
+                        <a href="?c=salons<?php echo isset($_GET['shop_id']) && (int)$_GET['shop_id']>0 ? "&shop_id=".$_GET['shop_id'] : ""; ?>" class="btn btn-primary btn-sm">Wyjdź</a>
                     </div>
                 </div>
                 <div class="row">
@@ -87,9 +87,14 @@
                         </div>
                         <div class="form-group">
                             <label>Wyświetl</label>
+                            <?php
+                                if(!count($shop)) {
+                                    $shop = array('published' => 1);
+                                }
+                            ?>
                             <select name="published" class="form-control">
-                                <option value="1">TAK</option>
-                                <option value="0">NIE</option>
+                                <option <?php echo (int)$shop['published']==1 ? "selected=\"selected\"" : ""; ?> value="1">TAK</option>
+                                <option <?php echo (int)$shop['published']==0 ? "selected=\"selected\"" : ""; ?> value="0">NIE</option>
                             </select>
                         </div>
                     </div>

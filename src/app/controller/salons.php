@@ -20,6 +20,8 @@ class Controller_Salons extends Controller {
         if(isset($_GET['shop_id']) && (int)$_GET['shop_id']>0){
             $query .= " where shop_id=".  htmlspecialchars($_GET['shop_id']);
         }
+        
+        $query .= " order by miasto ASC, shop_id ASC";
        
         $shops = $model_salons->getData()->query($query);
         $salons = array();

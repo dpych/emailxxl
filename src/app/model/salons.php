@@ -31,11 +31,12 @@ class Model_Salons extends Model_Sqlite {
         . "lokalizacja=\"{$obj->lokalizacja}\", "
         . "adres=\"{$obj->adres}\", "
         . "telefon=\"{$obj->telefon}\", "
-        . "pon-pt=\"{$obj->$pp}\", "
+        . "`pon-pt`=\"{$obj->$pp}\", "
         . "sob=\"{$obj->sob}\", "
         . "niedz=\"{$obj->niedz}\", "
-        . "published=\"{$obj->published}\" "
+        . "published={$obj->published} "
         . "WHERE id={$obj->id}";
+var_dump($sql);
         return $this->_data->exec($sql);
     }
     

@@ -49,7 +49,7 @@
                             <?php foreach( $salons as $shop ) : ?>
                             <tr>
                                 <td><?php echo $shop['id']; ?></td>
-                                <td><?php echo $pages[$shop['shop_id']]; ?></td>
+                                <td><?php echo isset($pages[$shop['shop_id']]) ? $pages[$shop['shop_id']] : ""; ?></td>
                                 <td><a href="?c=salons&a=edit&id=<?php echo $shop['id']; ?>"><?php echo $shop['miasto']; ?></a></td>
                                 <td><a href="?c=salons&a=edit&id=<?php echo $shop['id']; ?>"><?php echo $shop['lokalizacja']; ?></a></td>
                                 <td><a href="?c=salons&a=edit&id=<?php echo $shop['id']; ?>"><?php echo $shop['adres']; ?></a></td>
