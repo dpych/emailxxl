@@ -12,9 +12,13 @@ abstract class Controller {
     }
     
     public function getMsg() {
-        $msg = isset($_SESSION['message']) & $_SESSION['message'] ? $_SESSION['message'] : "";
-        $_SESSION['message'] = NULL;
-        return $msg;
+        if($_SESSION) {
+            $msg = isset($_SESSION['message']) & $_SESSION['message'] ? $_SESSION['message'] : "";
+            $_SESSION['message'] = NULL;
+            return $msg;
+        } else {
+            return "";
+        }
     }
     
     public function http_digest_parse($txt)
