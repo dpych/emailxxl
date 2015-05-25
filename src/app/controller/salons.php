@@ -5,6 +5,11 @@
  * @author Dawid Pych
  */
 class Controller_Salons extends Controller {
+    
+    public function __construct() {
+        $this->useAuth();
+    }
+
     public function index() {
         $msg = $this->getMsg();
         $model_salons = new Model_Salons();

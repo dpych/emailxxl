@@ -1,6 +1,10 @@
 <?php
 class Controller_Main extends Controller {
     
+    public function __construct() {
+        $this->useAuth();
+    }
+    
     public function index() {
         echo View::factory('index.php');
     }

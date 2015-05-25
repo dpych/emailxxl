@@ -4,6 +4,10 @@ include_once './vendors/excel/PHPExcel/Autoloader.php';
 
 class Controller_Desc extends Controller {
     
+    public function __construct() {
+        $this->useAuth();
+    }
+    
     public function index() {
         $msg = $this->getMsg();
         echo View::factory('desc/index.php', array('msg'=>$msg));
