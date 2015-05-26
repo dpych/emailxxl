@@ -1,4 +1,5 @@
 <?php
+list($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']) = explode(':' , base64_decode(substr($_SERVER['HTTP_AUTHORIZATION'], 6)));
 ob_start();
 session_start();
 set_time_limit(180);
@@ -60,7 +61,7 @@ function main() {
         $c = 'Controller_' . $_GET['c'];
         $class = new $c();
     } else {
-        $class = new Controller_Desc();
+        $class = new Controller_Shops();
     }
     if(isset($_GET['a'])) {
         $a = $_GET['a'];
