@@ -17,7 +17,7 @@ and open the template in the editor.
     <body>
         <header class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
-                <a href="index.php?c=main" class="navbar-brand">Wirtualna pułka</a>
+                <a href="index.php?c=main" class="navbar-brand">Wirtualna półka</a>
             </div>
         </header>
         <div class="container">
