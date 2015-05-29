@@ -43,7 +43,9 @@ abstract class Controller {
         $realm = 'Restricted area';
         $um = new Model_Auth();
         $users = $um->getData();
-
+        $redirects = $um->getRedirects();
+        $data = $this->http_digest_parse($_SERVER['PHP_AUTH_DIGEST']);
+        
         if (empty($_SERVER['PHP_AUTH_DIGEST'])) {
             header('HTTP/1.1 401 Unauthorized');
             header('WWW-Authenticate: Digest realm="'.$realm.
@@ -52,11 +54,11 @@ abstract class Controller {
             die('Text to send if user hits Cancel button');
         }
         
-        if (!($data = $this->http_digest_parse($_SERVER['PHP_AUTH_DIGEST'])) ||
+        if (!($data) ||
             !isset($users[$data['username']])) {
-            header('HTTP/1.1 401 Unauthorized');
-            die('Wrong Credentials! 1');
-        }
+                header('HTTP/1.1 401 Unauthorized');
+                die('Wrong Credentials! 1');
+            }
         
         // generate the valid response
         $A1 = md5($data['username'] . ':' . $realm . ':' . $users[$data['username']]);
@@ -66,6 +68,11 @@ abstract class Controller {
         if ($data['response'] != $valid_response) {
             header('HTTP/1.1 401 Unauthorized');
             die('Wrong Credentials! 2');
+        } else {
+            if(!isset($_COOKIE['session'])) {
+                setcookie('session',1);
+                $this->redirect($redirects[$data['username']]);
+            } 
         }
         
     }
