@@ -37,6 +37,7 @@
             foreach($products as $item) : 
                 $i++;
                 $col++;
+                if(isset($item->url)) :
             ?>
             <td style="font-family: Verdana, Geneva, sans-serif; font-size: 11px; vertical-align: top; text-transform: uppercase; padding: 5px;">
                 <a href="<?php echo $item->url ?>utm_content=produkt&amp;utm_campaign=M_<?php echo date('d_m_Y'); ?>_Wirtualny_Koszyk_U&amp;smclient=$$id_salesmanago$$" target="_blank" title="<?php echo $item->attributes->attribute[0]->value . $item->name ?>" style="color: #000; text-decoration: none;">
@@ -51,6 +52,7 @@
             ?>
         </tr>
         <tr>
+            <?php endif; ?>
             <?php endif; ?>
             <?php endforeach; ?>
             <?php if($col) : ?>
