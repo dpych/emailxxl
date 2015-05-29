@@ -43,7 +43,7 @@ abstract class Controller {
         $realm = 'Restricted area';
         $um = new Model_Auth();
         $users = $um->getData();
-        
+
         if (empty($_SERVER['PHP_AUTH_DIGEST'])) {
             header('HTTP/1.1 401 Unauthorized');
             header('WWW-Authenticate: Digest realm="'.$realm.
