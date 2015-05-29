@@ -15,7 +15,10 @@ class Controller_Main extends Controller {
         $email->run();
         $files = array();
         $files[$email->getFileName()] = date('Ymd') . '.html';
-
+        for($i=1; $i<=7; $i++) {
+            $files['./images/mailing_0' . $i . '.jpg'] = 'mailing_0' . $i . '.jpg';
+        }
+        
         Zip::archive($files, './download/' . date('Ymd'));
         Files::delete('./download/' . date('Ymd') . '.html');
         
