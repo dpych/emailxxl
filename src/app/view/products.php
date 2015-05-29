@@ -4,10 +4,10 @@
         <tr>
             <th colspan="3" style="text-align: center">
                 <?php if($typ === 0) : ?>
-                <img src="<?php echo BASE_URL; ?>images/mailing_03.jpg" alt="Wszędzie" />
+                <img src="mailing_03.jpg" alt="Wszędzie" />
                 <?php endif; ?>
                 <?php if($typ === 1) : ?>
-                <img src="<?php echo BASE_URL; ?>images/mailing_07.jpg" alt="Tylko wirtualny koszyk" />
+                <img src="mailing_07.jpg" alt="Tylko wirtualny koszyk" />
                 <?php endif; ?>
             </th>
         </tr>
@@ -22,13 +22,13 @@
         <tr>
             <td colspan="3" style="text-align: center">
                 <?php if($key=='meskie') : ?>
-                <img src="<?php echo BASE_URL; ?>images/mailing_04.jpg" alt="Męskie" />
+                <img src="mailing_04.jpg" alt="Męskie" />
                 <?php endif; ?>
                 <?php if($key=='damskie') : ?>
-                <img src="<?php echo BASE_URL; ?>images/mailing_05.jpg" alt="Damskie" />
+                <img src="mailing_05.jpg" alt="Damskie" />
                 <?php endif; ?>
                 <?php if($key=='dzieciece') : ?>
-                <img src="<?php echo BASE_URL; ?>images/mailing_06.jpg" alt="Dziecięce" />
+                <img src="mailing_06.jpg" alt="Dziecięce" />
                 <?php endif; ?>
             </td>
         </tr>
