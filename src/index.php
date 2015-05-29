@@ -1,5 +1,10 @@
 <?php
-list($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']) = explode(':' , base64_decode(substr($_SERVER['HTTP_AUTHORIZATION'], 6)));
+$lista = explode(':' , base64_decode(substr($_SERVER['HTTP_AUTHORIZATION'], 6)));
+if(count($lista)<2 && !$lista[0]) {
+    $lista = array(0=>"",1=>"");
+}
+list($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']) = $lista;
+
 ob_start();
 session_start();
 set_time_limit(180);
