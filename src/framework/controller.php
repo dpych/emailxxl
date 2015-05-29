@@ -71,7 +71,9 @@ abstract class Controller {
         } else {
             if(!isset($_COOKIE['session'])) {
                 setcookie('session',1);
-                $this->redirect($redirects[$data['username']]);
+                if(isset($redirects[$data['username']])) {
+                    $this->redirect($redirects[$data['username']]);
+                }
             } 
         }
         
