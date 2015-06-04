@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpdoc>
+    <title>MyMIG Framework</title>
+    <encoding>utf8</encoding>
+    <parser>
+        <target>docs/phpdoc</target>
+    </parser>
+    <transformer>
+        <target>docs/phpdoc</target>
+    </transformer>
+    <transformations>
+        <template name="responsive-twig" />
+        <template name="checkstyle"/>
+        <transformation writer="FileIO" query="copy" source="data/specification.pdf" artifact="specification.pdf" />
+    </transformations>
+    <files>
+        <directory>./src</directory>
+        <ignore>*vendors*</ignore>
+    </files>
+</phpdoc>
