@@ -11,7 +11,7 @@
     <body>
         <header class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
-                <a class="navbar-brand" href="index.php?c=desc">Lista Salonów / Sklepów - Lista</a>
+                <a class="navbar-brand" href="index.php?c=shops">Lista Salonów / Sklepów - Lista</a>
                 <ul class="navbar-nav nav">
                     <li><a href="?c=shops">Strony</a></li>
                     <li class="active"><a href="?c=salons">Sklepy/Salony</a></li>
@@ -25,7 +25,17 @@
             </div>
             <?php endif; ?>
             <div class="row">
-                <div class="col-xs-12 text-right">
+                <div class="col-xs-6">
+                    <form action="?c=salons&a=import" class="row">
+                        <div class="col-xs-8">
+                            <input type="file" name="excel" class="form-control" />
+                        </div>
+                        <div class="col-xs-4">
+                            <button type="submit" class="btn btn-default">Importuj</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-xs-6 text-right">
                     <a href="?c=salons&a=edit<?php echo isset($_GET['shop_id']) ? '&shop_id='.$_GET['shop_id'] : ''; ?>" class="btn btn-primary btn-sm">Dodaj nową lokalizację</a>
                 </div>
             </div>
