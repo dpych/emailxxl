@@ -74,7 +74,7 @@ class ProductsEmail {
         
         $html = View::factory('template.php', array('products' => $this->products));
         
-        file_put_contents($this->_filename, $html);
+        file_put_contents($this->_filename, mb_convert_encoding($html, 'UTF-8', 'OLD-ENCODING'));
         
         return $html;
     }

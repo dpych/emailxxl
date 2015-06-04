@@ -26,7 +26,7 @@
             <?php endif; ?>
             <div class="row">
                 <div class="col-xs-6">
-                    <form action="?c=salons&a=import" class="row">
+                    <form action="?c=salons&a=import" class="row" method="POST" enctype="multipart/form-data">
                         <div class="col-xs-8">
                             <input type="file" name="excel" class="form-control" />
                         </div>

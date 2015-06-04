@@ -1,6 +1,6 @@
 <?php
 /**
- * Description of shops
+ * Controller for salons page
  *
  * @author Dawid Pych
  */
@@ -10,6 +10,11 @@ class Controller_Salons extends Controller {
         $this->useAuth();
     }
 
+    /**
+     * Default action for list view of salons
+     * 
+     * @uses Example rout should look like ?c=salons or ?c=salons&a=index 
+     */
     public function index() {
         $msg = $this->getMsg();
         $model_salons = new Model_Salons();
@@ -37,6 +42,12 @@ class Controller_Salons extends Controller {
         echo View::factory('salons/index.php', array('salons'=>$salons, 'msg' => $msg, 'pages'=>$pages));
     }
     
+    /**
+     * Default action for edit or add view of salon
+     * 
+     * @uses Example rout should look like ?c=salons&a=edit for create new or 
+     * ?c=salons&a=edit&id=1 for edit existing item
+     */
     public function edit() {
         $shop = array();
         $msg = $this->getMsg();
@@ -49,6 +60,11 @@ class Controller_Salons extends Controller {
         echo View::factory('salons/edit.php', array('shops'=>$shops, 'shop'=>$shop, 'msg'=>$msg));
     }
     
+    /**
+     * Method from save changes or insert new position to database
+     * It should uses only from post
+     * When finish import. Redirect to ::index
+     */
     public function save() {
         $ret = false;
         $lastis = "";
@@ -92,5 +108,25 @@ class Controller_Salons extends Controller {
             $this->setMsg('Aktualizacja bazy się nie powiodła', 'danger');
         }
         $this->redirect('?c=salons&a=edit&id='.$lastid . ($_POST['shop_id'] ? '&shop_id=' . $_POST['shop_id'] : "" ));
+    }
+    
+    /**
+     * Import method from Excel file. 
+     * It should uses only from post and need have send $_FILES['excel'] file
+     * When finish import. Redirect to ::index
+     */
+    public function import() {
+        if(isset($_FILES['excel'])){
+            $import = $_FILES;
+            $model = new Model_Salons();
+            if($model->importEXCEL($import)) {
+                 $this->setMsg('Import przebiegł prawidłowo', 'success');
+            } else {
+                 $this->setMsg('Aktualizacja bazy się nie powiodła', 'danger');
+            }
+        } else {
+            $this->setMsg('Nie załączyłeś pliku excel', 'danger');
+        }
+        $this->redirect('?c=salons');
     }
 }
