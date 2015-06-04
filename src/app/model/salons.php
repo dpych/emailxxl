@@ -159,7 +159,7 @@ class Model_Salons extends Model_Sqlite {
     /**
      * Maps columns from Excel file for correct update
      * 
-     * @param type $worksheet
+     * @param object$worksheet
      * @return array | null
      */
     private function mapColumnIds($worksheet) {
@@ -179,7 +179,7 @@ class Model_Salons extends Model_Sqlite {
     /**
      * Return column id for shop id | name column
      * 
-     * @param type $worksheet
+     * @param object $worksheet
      * @return int
      */
     
