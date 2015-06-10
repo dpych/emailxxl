@@ -188,6 +188,9 @@ class Controller_Api extends Controller {
     }
 
     private function render($data) {
+        header("Access-Control-Allow-Origin: *");
+        header('Access-Control-Allow-Methods: GET');
+        header("Access-Control-Allow-Headers: X-Requested-With");
         if(!isset($_GET['format']) || $_GET['format']=='json' ) {
             echo $this->generateJSON($data);
         } elseif($_GET['format']=='html' ) {
