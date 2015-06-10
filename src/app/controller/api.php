@@ -4,10 +4,12 @@ class Controller_Api extends Controller {
         $json = new stdClass();
         $json->success = false;
         $json->data = array();
-                
-        if(isset($_GET['id']) && (int) $_GET['id'] > 0) {
+        var_dump($_SERVER['REQUEST_METHOD']);
+        if((isset($_GET['id']) && (int) $_GET['id'] > 0) || (isset($_GET['shop_id']) && (int) $_GET['shop_id'] > 0)) {
+            $id = $_GET['shop_id'] ? $_GET['shop_id'] : $_GET['id'];
+            $data = array();
             $salons = new Model_Salons();
-            $salons = $salons->getConn()->query('select * from salons where published=1 and shop_id='.  htmlspecialchars($_GET['id'] .' order by miasto ASC'));
+            $salons = $salons->getConn()->query('select * from salons where published=1 and shop_id='. (int) htmlspecialchars($id) .' order by miasto ASC');
             $data = array();
             while($row = $salons->fetchArray(SQLITE3_ASSOC)) {
                 $data[] = $row;
