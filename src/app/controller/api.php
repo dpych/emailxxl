@@ -4,7 +4,7 @@ class Controller_Api extends Controller {
         $json = new stdClass();
         $json->success = false;
         $json->data = array();
-        var_dump($_SERVER['REQUEST_METHOD']);
+
         if((isset($_GET['id']) && (int) $_GET['id'] > 0) || (isset($_GET['shop_id']) && (int) $_GET['shop_id'] > 0)) {
             $id = $_GET['shop_id'] ? $_GET['shop_id'] : $_GET['id'];
             $data = array();
